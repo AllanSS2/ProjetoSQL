@@ -54,5 +54,20 @@ select * from tbProdutos;
 -- Apagar registros das tabelas
 delete from tbProdutos where codProd = 7;
 
---Visualizar os registros apagados
+-- Visualizar os registros apagados
 select * from tbProdutos;
+
+
+-- Visualizar colunas especificas na tabela
+select descricao, quantidade from tbProdutos;
+
+-- Mudar o nome da coluna pra visualização do usuario
+select codProd as 'Código', descricao as 'Descrição' from tbProdutos;
+
+-- colunas virtuais so vão aparecer para os usuarios
+select codProd as 'Código', descricao as 'Descrição', 'Vendido' as 'Status' from tbProdutos;
+
+
+-- Visualizar uma vez os dados repetidos.
+select distinct nome from tbProdutos;
+
