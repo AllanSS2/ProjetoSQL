@@ -1,3 +1,5 @@
+-- Allan Sampaio Sousa
+
 drop database dbEmpresaABC;
 
 create database dbEmpresaABC;
@@ -23,32 +25,34 @@ INSERT INTO PRODUTOS ( CODIGO, NOME, TIPO, QUANTIDADE, VALOR ) VALUES ( 8,'TECLA
 INSERT INTO PRODUTOS ( CODIGO, NOME, TIPO, QUANTIDADE, VALOR ) VALUES ( 9,'VIDEOCASSETE', 'ELETRONICOS', 200, 300.00 );
 INSERT INTO PRODUTOS ( CODIGO, NOME, TIPO, QUANTIDADE, VALOR ) VALUES ( 10,'MOUSE', 'INFORMATICA', 400, 60.00 ); 
 
-select codigo, nome from PRODUTOS where tipo = 'informatica'; 
+select * from produtos;
 
+-- 1. Aumente em 12% o valor dos produtos cujos nomes iniciem com a letra 'F'
 
-update produtos set valor = valor *1.15 where tipo = 'informatica';
-select * from PRODUTOS where tipo = 'informatica';
+update produtos set valor = valor * 1.12 where nome like 't%';
 
+select * from produtos where nome like 't%';
 
-select * from PRODUTOS where tipo = 'eletronicos' and valor < 600;
-update produtos set valor = valor * 1.05 where tipo = 'eletronicos' and valor < 600;
+-- 2. Aumentar em 50 unidades todos os produtos cujo valor seja maior que 400 e inferior a 600 
 
-select * from PRODUTOS where tipo = 'digitais' or valor > 1000;
-update produtos set valor = valor * 0.80 where tipo = 'digitais' or valor > 1000;
-
-
-select * from produtos where tipo in('informatica','digitais');
-select * from produtos where tipo not in('informatica','digitais');
+update produtos set QUANTIDADE = QUANTIDADE + 50 where valor between 400 and 600;
 
 select * from produtos where valor between 400 and 600;
-select * from produtos where valor not between 400 and 600;
 
+-- 3. Aplicar um desconto de 50% (*0.5) em todos os produtos que as unidades de estoque sejam maiores que 300
 
-select * from produtos where nome like '%t';
-select * from produtos where nome like 't%';
-select * from produtos where nome like '%t%';
+update produtos set valor = valor * 0.5 where QUANTIDADE > 300;
 
+select * from produtos where QUANTIDADE > 300;
 
-select * from PRODUTOS where valor order by valor;
-select * from PRODUTOS where valor order by valor desc;
-select * from produtos order by nome asc, valor desc;
+-- 4. Exiba o produto de CODIGO = 4
+
+select * from produtos where codigo = 4;
+
+-- 5. Exibir todos os produtos que não tenham a letra 'Y
+
+select * from PRODUTOS where nome not like '%y%';
+
+--6. Exibir todos os produtos que se iniciem com nome 'MO' e tenham como tipo as letras 'MA' 
+
+select * from produtos where nome like 'mo%' and tipo like '%ma%'
