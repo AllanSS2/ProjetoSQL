@@ -236,3 +236,37 @@ select * from tbTitulos order by codTit;
 select * from tbPedidos order by numPed;
 select * from tbTitulos_Artistas order by codTit;
 select * from tbTitulos_Pedidos order by numPed;
+
+
+
+-- 1. Selecione o nome dos CDs e o nome da gravadora de cada CD. 
+select tit.nomeCd as 'Nome dos CDs', grav.nomeGrav as 'Nome da gravadora' from tbTitulos as tit inner join tbGravadoras as grav on tit.codGrav = grav.codGrav;
+
+-- 2. Selecione o nome dos CDs e o nome da categoria de cada CD.
+
+select tit.nomeCd as 'Nome dos CDs', cat.nomeCat as 'Nome da categoria' from tbTitulos as tit inner join tbCategorias as cat on cat.codCat = tit.codCat;
+
+-- 3. Selecione o nome dos CDs, o nome das gravadoras de cada CD e o nome da categoria de cada CD. 
+select tit.nomeCd as 'Nome dos CDs', grav.nomeGrav as 'Nome da gravadora',cat.nomeCat as 'Nome da categoria' from tbTitulos as tit inner join tbGravadoras as grav on tit.codGrav = grav.codGrav inner join tbCategorias as cat on cat.codCat = tit.codCat;
+
+-- 4. Selecione o nome dos clientes e os títulos dos CDs vendidos em cada pedido que o cliente fez.
+select cli.nomeCli as 'Nome dos clientes', tit.nomeCd as 'Titulos dos CDs' from tbClientes as cli left join tbTitulos as tit on cli.codCli = tit.codTit;
+
+-- 5. Selecione o nome do funcionário, número, data e valor dos pedidos que este funcionário registrou, além do nome do cliente que está fazendo o pedido.
+
+select func.nomeFunc as 'Nome do funcionário', ped.numPed as 'Número do pedido', ped.dataPed as 'Data', ped.valorPed as 'Valor dos pedidos', cli.nomeCli as 'Nome do cliente' from tbFuncionarios as func inner join tbPedidos as ped on func.codFunc = ped.codFunc inner join tbClientes as cli on cli.codCli = ped.codCli;
+
+-- 6. Selecione o nome dos funcionários e o nome de todos os dependentes de cada funcionário.
+
+select func.nomeFunc as 'Nome dos funcionários', dep.nomeDep as 'Nome dos dependentes' from tbFuncionarios as func inner join tbDependentes as dep on func.codFunc = dep.codFunc;
+
+-- 7. Selecione o nome dos clientes e o nome dos cônjuges de cada cliente.
+select cli.nomeCli as 'Nome dos clientes', conj.nomeConj as 'Nome dos cônjuges' from tbClientes as cli inner join tbConjuge as conj on cli.codcli = conj.codcli;
+
+-- 8. Selecione o nome de todos os clientes. Se estes possuem cônjuges, mostrar os nomes de seus cônjuges também.
+
+select cli.nomeCli as 'Nome dos clientes', conj.nomeConj as 'Nome dos cônjuges' from tbClientes as cli left join tbConjuge as conj on conj.codcli = cli.codcli;
+
+-- 9. Selecione nome do cliente, nome do cônjuge, número do pedido que cada cliente fez, valor de cada pedido que cada cliente fez e código do funcionário que atendeu a cada pedido.
+
+select cli.nomeCli as 'Nome dos clientes', conj.nomeConj as 'Nome dos cônjuges', ped.numPed as 'Numero dos pedidos', ped.valorPed as 'Valor dos pedidos', ped.codFunc as 'Codigo dos funcionarios' from tbClientes as cli inner join tbConjuge as conj on cli.codCli = conj.codCli left join tbPedidos as ped on cli.codCli = ped.codCli;

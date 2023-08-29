@@ -132,4 +132,14 @@ select cli.nome as 'Nome do Cliente', vend.dataVenda as 'Data da Venda', prod.de
 -- data da entrada
 -- nome do fornecedor
 -- cnpj do fornecedor
-select func.nome as 'Nome do funcionário', usu.nome as 'Nome do usúario', vend.dataVenda as 'Data da venda', vend.valorTotal as 'Valor total', prod.descricao as 'Nome do produto', prod.dataEntrada as 'Data da entrada', forn.nome as 'Nome do fornecedor', forn.cnpj as 'CNPJ do fornecedor' from tbFuncionarios as func inner join tbUsuarios as usu on func.codFunc = usu.codFunc inner join tbVendas as vend on usu.codUsu = vend.codUsu inner join tbProdutos as prod on vend.codProd = prod.codProd inner join tbFornecedores as forn on prod.codForn = forn.codForn;
+select func.nome as 'Nome do funcionário', usu.nome as 'Nome do usúario', vend.dataVenda as "Data da venda", vend.valorTotal as 'Valor total', prod.descricao as 'Nome do produto', prod.dataEntrada as 'Data da entrada', forn.nome as 'Nome do fornecedor', forn.cnpj as 'CNPJ do fornecedor' from tbFuncionarios as func inner join tbUsuarios as usu on func.codFunc = usu.codFunc inner join tbVendas as vend on usu.codUsu = vend.codUsu inner join tbProdutos as prod on vend.codProd = prod.codProd inner join tbFornecedores as forn on prod.codForn = forn.codForn;
+
+
+-- Pergunta para tabela Funcionarios qual os produtos cadastrados
+select prod.descricao, prod.quantidade from tbFuncionarios as func left join tbProdutos as prod on func.codFunc = prod.codProd;
+
+
+select prod.descricao, prod.quantidade from tbFuncionarios as func right join tbProdutos as prod on func.codFunc = prod.codProd;
+
+
+select prod.descricao, prod.quantidade from tbFuncionarios as func inner join tbProdutos as prod on func.codFunc = prod.codProd;
